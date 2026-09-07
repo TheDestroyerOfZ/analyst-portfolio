@@ -39,7 +39,7 @@
   const dialog=$('case-dialog');
   document.querySelectorAll('[data-project]').forEach(button=>button.addEventListener('click',()=>{
     const p=data.projects[Number(button.dataset.project)];
-    $('case-content').innerHTML=`<div class="eyebrow">${esc(p.category)} / CASE STUDY</div><h2 id="case-title">${esc(p.title)}</h2><div class="tags">${p.tags.map(t=>`<span>${esc(t)}</span>`).join('')}</div>${p.sections.map(s=>`<h3>${esc(s.title)}</h3><p>${esc(s.body)}</p>`).join('')}<p class="case-note">${esc(p.note)}</p>${p.id===0?'<a class="button primary" id="open-demo" href="#demo">Explore the interactive sample ↗</a>':''}`;
+    $('case-content').innerHTML=`<div class="eyebrow">${esc(p.category)} / CASE STUDY</div><h2 id="case-title">${esc(p.title)}</h2><div class="tags">${p.tags.map(t=>`<span>${esc(t)}</span>`).join('')}</div>${p.sections.map(s=>`<h3>${esc(s.title)}</h3><p>${esc(s.body)}</p>`).join('')}<p class="case-note">${esc(p.note)}</p><details class="data-table"><summary>Development context</summary><p>Personal project developed with AI assistance for implementation. Features and evidence shown here do not imply independent authorship of every line of code or commercial delivery experience.</p></details>${p.id===0?'<a class="button primary" id="open-demo" href="#demo">Explore the interactive sample ↗</a>':''}`;
     document.body.classList.add('modal-open');dialog.showModal();dialog.scrollTop=0;
     $('open-demo')?.addEventListener('click',()=>dialog.close());
   }));
@@ -53,12 +53,10 @@
     $('filter-status').textContent=`${visible} projects shown`;
   }));
   const library=[
-    ['Local study hub','DOCUMENT WORKFLOWS','A private study application combining document retrieval, OCR, source-linked answers, notes, and planning. The copied dashboard and document delivery were tested across four course folders. A public demonstration needs fictional course materials.'],
     ['NZ GPU price tracker','COLLECTION & COMPARISON','Retailer data collection, SQLite price history, and an HTML report. Price changes can be compared over time; the configured GPU performance rankings are approximate indices.'],
     ['Kaggle modelling','MACHINE LEARNING','Classification workflows, cross-validation, feature experiments, and submission generation. No leaderboard score or rank is claimed without confirmed competition evidence.'],
     ['Traffic & content research','EXPLORATORY ANALYSIS','Collects autocomplete suggestions and ranks topic opportunities with heuristic scores. These are discovery signals, not measured search volume or established commercial demand.'],
-    ['Japan trip planner','SCENARIO MODELLING','An HTML tool for comparing months and adjusting trip-cost assumptions. It demonstrates how estimates change with traveller choices; the underlying prices are dated.'],
-    ['Study Helper','LEARNING TOOLS','Subject-based notes, study sheets, flashcards, and Anki export. A supporting example of turning unstructured input into reusable outputs.']
+    ['Japan trip planner','SCENARIO MODELLING','An HTML tool for comparing months and adjusting trip-cost assumptions. It demonstrates how estimates change with traveller choices; the underlying prices are dated.']
   ];
   $('library-list').innerHTML=library.map(([name,type,body],i)=>`<details class="library-row"><summary><span class="library-num">0${i+1}</span><h3>${esc(name)}</h3><span class="library-type">${type}</span><span class="library-plus" aria-hidden="true">+</span></summary><p>${esc(body)}</p></details>`).join('');
   $('hero-total').textContent=money(total.total);$('hero-rows').textContent=total.rows;
